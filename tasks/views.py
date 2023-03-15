@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from tasks.models import Worker, Task
@@ -19,6 +20,15 @@ def index(request):
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "task_list.html"
+    template_name = "tasks/task_list.html"
+
+
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Task
+
+
+
+
+
 
 
