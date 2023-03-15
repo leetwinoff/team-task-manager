@@ -8,3 +8,7 @@ class Position(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
+
+
+class TaskType(models.Model):
+    name = models.CharField(max_length=255)
