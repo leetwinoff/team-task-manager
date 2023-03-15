@@ -9,10 +9,10 @@ class WorkerAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("position",)
     fieldsets = UserAdmin.fieldsets + (
         ("Additional info", {
-            "fields": ("years_of_experience", "phone_number"),
+            "fields": ("years_of_experience", ),
         }),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("Personal info", {"fields": ("first_name", "last_name", "email")}),
-        ("Additional info", {"fields": ("years_of_experience", "phone_number")}),
+        ("Additional info", {"fields": ("years_of_experience", )}),
     )
