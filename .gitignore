@@ -1,3 +1,5 @@
 .idea
 venv
 **__pycache__
+tasks/migrations
+db.sqlite3
