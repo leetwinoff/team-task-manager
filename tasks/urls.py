@@ -9,7 +9,10 @@ from tasks.views import (
     WorkerListView,
     WorkerDetailView,
     WorkerUpdateView,
-    PositionListView, PositionDetailView,
+    PositionListView,
+    PositionDetailView,
+    PositionUpdateView,
+    PositionDeleteView,
 )
 
 urlpatterns = [
@@ -23,7 +26,8 @@ urlpatterns = [
     path("worker/<int:pk>/update/", WorkerUpdateView.as_view(), name="worker-update"),
     path("positions/", PositionListView.as_view(), name="positions-list"),
     path("positions/<int:pk>/detail", PositionDetailView.as_view(), name="positions-detail"),
-
+    path("positions/<int:pk>/update", PositionUpdateView.as_view(), name="positions-update"),
+    path("positions/<int:pk>/delete", PositionDeleteView.as_view(), name="positions-delete"),
 ]
 
 app_name = "tasks"

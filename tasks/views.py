@@ -73,7 +73,19 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Position
 
 
+class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Position
+    fields = "__all__"
+    success_url = reverse_lazy("tasks:positions-list")
 
+
+class PositionDeleteView(
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    generic.DeleteView
+):
+    model = Position
+    success_url = reverse_lazy("tasks:positions-list")
 
 
 
