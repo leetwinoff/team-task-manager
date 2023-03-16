@@ -90,6 +90,11 @@ class PositionDeleteView(
 
 class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
+    template_name = "tasks/task_type_list.html"
+
+
+class TaskTypeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = TaskType
 
 
 
