@@ -3,14 +3,15 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import TaskForm
+from tasks.forms import TaskForm, WorkerCreationForm
 from tasks.models import Worker, Task, Position, TaskType
 
 
 def index(request):
     num_workers = Worker.objects.count()
-    num_tasks = Task.objects.count()
-    num_positions = Position.objects.count()
+    num_tasks = Task.objects.all()
+    num_positions = Position.objects.all()
+
 
     context = {
         "num_workers": num_workers,
@@ -38,7 +39,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = "__all__"
+    form_class = TaskForm
     success_url = reverse_lazy("tasks:task-list")
 
 
@@ -58,7 +59,7 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
-    fields = "__all__"
+    form_class = WorkerCreationForm
     success_url = reverse_lazy("tasks:worker-list")
 
 

@@ -5,18 +5,15 @@
 {% endblock %}
 {% block navbar %}
   <header>
-      <h1>Welcome to my website</h1>
-      <nav>
-        <ul>
-          <li><a href="{% url "tasks:task-list" %}">Tasks</a></li>
-          <li><a href="#">Worker</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+    <h1>Welcome to my website</h1>
+  </header>
 {% endblock %}
 {% block content %}
   <h1>Welcome to home page</h1>
-  {{ num_positions }}
+  {% for num in num_positions %}
+    <ul>
+      <li>{{ num.name }}</li>
+    </ul>
+  {% endfor %}
 {% endblock %}
 
