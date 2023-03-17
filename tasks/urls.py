@@ -16,7 +16,7 @@ from tasks.views import (
     TaskTypeListView,
     TaskTypeDetailView,
     TaskTypeUpdateView,
-    TaskTypeDeleteView, TaskUpdateView, WorkerCreateView, PositionCreateView,
+    TaskTypeDeleteView, TaskUpdateView, WorkerCreateView, PositionCreateView, TaskTypeCreateView,
 )
 
 
