@@ -1,19 +1,13 @@
 {% extends "base.html" %}
-
-{% block title %}
-  <title>Home Page</title>
-{% endblock %}
-{% block navbar %}
-  <header>
-    <h1>Welcome to my website</h1>
-  </header>
-{% endblock %}
 {% block content %}
-  <h1>Welcome to home page</h1>
-  {% for num in num_positions %}
-    <ul>
-      <li>{{ num.name }}</li>
-    </ul>
-  {% endfor %}
-{% endblock %}
+    <h1>Taxi Service Home</h1>
+    <p>Welcome to Best Taxi Ever!</p>
+    <h2>Dynamic content</h2>
+    <p>The Taxi service has the following record counts:</p>
+{#    <ul>#}
+{#        <li><strong>Positions</strong> {{ num_cars }}</li>#}
+{#        <li><strong>Drivers:</strong> {{ num_drivers }}</li>#}
+{#        <li><strong>Manufacturers:</strong> {{ num_manufacturers }}</li>#}
+{#    </ul>#}
 
+{% endblock %}
