@@ -41,7 +41,7 @@ def validate_years_of_experience(years_of_experience):
 
 
 class PositionSearchForm(forms.Form):
-    model = forms.CharField(
+    name = forms.CharField(
         max_length=255,
         required=False,
         label="",
