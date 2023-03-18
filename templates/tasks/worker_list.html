@@ -14,10 +14,11 @@
     </form>
 
     {% if worker_list %}
-    <table class="table">
+    <table class="table table-striped">
       <tr>
         <th>ID</th>
         <th>Position</th>
+        <th>Username</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Years of experience</th>
@@ -25,7 +26,8 @@
     {% for worker in worker_list %}
       <tr>
         <td>{{ worker.id }}</td>
-        <td><a href="{{ worker.get_absolute_url }}">{{ worker.username }} {% if user == worker %} (Me){% endif %}</a></td>
+        <td><a href="{{ worker.get_absolute_url }}">{{ worker.position }} {% if user == worker %} (Me){% endif %}</a></td>
+        <td>{{ worker.username }}</td>
         <td>{{ worker.first_name }}</td>
         <td>{{ worker.last_name }}</td>
         <td>{{ worker.years_of_experience }}</td>

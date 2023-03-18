@@ -27,6 +27,7 @@ class WorkerCreationForm(UserCreationForm):
             "years_of_experience"
         )
 
+
     def clean_years_of_experience(self):
         return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
@@ -37,3 +38,14 @@ def validate_years_of_experience(years_of_experience):
     elif years_of_experience == 0:
         raise ValidationError("Years of experience should be more than 1 Year for this position")
     return years_of_experience
+
+
+class PositionSearchForm(forms.Form):
+    model = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Search by position"}
+        )
+    )

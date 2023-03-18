@@ -101,7 +101,6 @@ class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class PositionDeleteView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     generic.DeleteView
 ):
     model = Position

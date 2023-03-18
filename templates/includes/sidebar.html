@@ -1,10 +1,3 @@
-{#<ul class="sidebar-nav">#}
-{#  <li><a href="{% url "tasks:index" %}">Home</a></li>#}
-{#  <li><a href="{% url "tasks:task-list" %}">All tasks</a></li>#}
-{#  <li><a href="{% url "tasks:positions-list" %}">All Positions</a></li>#}
-{#  <li><a href="{% url "tasks:worker-list" %}">All workers</a></li>#}
-{#  <li><a href="{% url "tasks:task-types" %}">Task types</a></li>#}
-{#</ul>#}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid w-100">
     <a class="navbar-brand" href="{% url "tasks:index" %}">Home</a>
@@ -17,13 +10,13 @@
           <a class="nav-link active" aria-current="page" href="{% url "tasks:task-list" %}">Tasks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url "tasks:task-list" %}">Tasks</a>
+          <a class="nav-link active" aria-current="page" href="{% url "tasks:worker-list" %}">Workers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url "tasks:task-list" %}">Tasks</a>
+          <a class="nav-link active" aria-current="page" href="{% url "tasks:positions-list" %}">Positions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url "tasks:task-list" %}">Tasks</a>
+          <a class="nav-link active" aria-current="page" href="{% url "tasks:task-types" %}">Task types</a>
         </li>
       </ul>
     </div>
