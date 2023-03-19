@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import TaskForm, WorkerCreationForm, PositionSearchForm
+from tasks.forms import TaskForm, WorkerCreationForm, PositionSearchForm, WorkerSearchForm, TaskCreationForm
 from tasks.models import Worker, Task, Position, TaskType
 
 
@@ -13,7 +13,6 @@ def index(request):
     num_workers = Worker.objects.count()
     num_tasks = Task.objects.all()
     num_positions = Position.objects.all()
-
 
     context = {
         "num_workers": num_workers,
@@ -35,13 +34,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    form_class = TaskForm
+    form_class = TaskCreationForm
     success_url = reverse_lazy("tasks:task-list")
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    form_class = TaskForm
+    form_class = TaskCreationForm
     success_url = reverse_lazy("tasks:task-list")
 
 
@@ -54,9 +53,33 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     template_name = "tasks/worker_list.html"
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+
+        last_name = self.request.GET.get("last_name", "")
+
+        context["search_form"] = WorkerSearchForm(
+            initial={"last_name": last_name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Worker.objects.all()
+        form = WorkerSearchForm(self.request.GET)
+
+        if form.is_valid():
+            last_name = form.cleaned_data["last_name"]
+            if last_name:
+                queryset = queryset.filter(last_name__icontains=last_name)
+        return queryset
+
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
+
+    class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
+        model = Worker
+
 
 
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
@@ -159,10 +182,9 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
 def toggle_assign_to_task(request, pk):
     worker = Worker.objects.get(id=request.user.id)
     if (
-        Worker.objects.get(id=pk) in worker.tasks.all()
+        Task.objects.get(id=pk) in worker.tasks.all()
     ):  # probably could check if car exists
         worker.tasks.remove(pk)
     else:
         worker.tasks.add(pk)
-    return HttpResponseRedirect(reverse_lazy("task:task-detail", args=[pk]))
-
+    return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[pk]))
