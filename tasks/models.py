@@ -13,6 +13,11 @@ class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
     years_of_experience = models.IntegerField()
 
+    class Meta:
+
+        verbose_name = "worker"
+        verbose_name_plural = "workers"
+
 
 class TaskType(models.Model):
     name = models.CharField(max_length=255)
@@ -35,3 +40,5 @@ class Task(models.Model):
     priority = models.CharField(choices=PRIORITY_CHOICES, max_length=10)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(Worker, related_name="tasks")
+
+
