@@ -34,8 +34,11 @@
         <td>{{ task.is_completed }}</td>
         <td>{{ task.priority }}</td>
         <td>{{ task.task_type }}</td>
-        <td>{{ task.assignees }}</td>
-{#        <td><a href="{{ worker.get_absolute_url }}">{{ worker.position }} {% if user == worker %} (Me){% endif %}</a></td>#}
+        <td>
+          {% for worker in task.assignees.all %}
+            {{ worker.username }}
+          {% endfor %}
+        </td>
       </tr>
     {% endfor %}
 
