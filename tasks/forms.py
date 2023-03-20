@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from tasks.models import Task, Worker
 
 
-
 class TaskCreationForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=Worker.objects.all(),

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div style="background-image: url(/static/img/2.png);">
+  <div class="container-tasktype">
+  <h1 style="text-align: center">
+    Task types
+  </h1>
+    {% if tasktype_list %}
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+        </tr>
+      {% for tasktype in tasktype_list %}
+        <tr>
+          <td>{{ tasktype.id }}</td>
+          <td>{{ tasktype.name }}</td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+ </div>
+</div>
+
+{% endblock %}
