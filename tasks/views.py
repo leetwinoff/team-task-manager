@@ -27,6 +27,7 @@ def index(request):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "tasks/task_list.html"
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -79,6 +80,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     template_name = "tasks/worker_list.html"
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
@@ -133,6 +135,7 @@ class WorkerDeleteView(
 class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     template_name = "tasks/positions.html"
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PositionListView, self).get_context_data(**kwargs)
@@ -182,6 +185,7 @@ class PositionDeleteView(
 class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     template_name = "tasks/task_type_list.html"
+    paginate_by = 5
 
 
 class TaskTypeDetailView(LoginRequiredMixin, generic.DetailView):

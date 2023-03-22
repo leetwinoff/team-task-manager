@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Team task manager</title>{% endblock %}
+  {% block title %}<title>SurfTask</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"
@@ -17,11 +17,29 @@
 </head>
 <body>
 
+  <div class="container">
+
         {% block content %}
 
         {% endblock %}
+
+        {% block pagination %}
+          {% include "includes/pagination.html" %}
+        {% endblock %}
+
       </div>
     </div>
   </div>
+
+  <br>
+  <br>
+  <br>
+
+  {% block footer %}
+    <footer class="bg-light py-5">
+      <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright © 2022 - Company Name</div></div>
+    </footer>
+  {% endblock %}
+
 </body>
 </html>
