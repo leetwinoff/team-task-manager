@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import WorkerCreationForm, PositionSearchForm, WorkerSearchForm, TaskCreationForm, \
-    TaskSearchForm
+from tasks.forms import WorkerCreationForm, PositionSearchForm, WorkerSearchForm, TaskSearchForm, TaskForm
 from tasks.models import Worker, Task, Position, TaskType
 
 
@@ -28,6 +27,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "tasks/task_list.html"
     paginate_by = 2
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -56,20 +56,29 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    form_class = TaskCreationForm
+    form_class = TaskForm
     success_url = reverse_lazy("tasks:task-list")
-
-
-class TaskUpdateView(LoginRequiredMixin, generic.CreateView):
-    model = Task
     template_name = "tasks/task_form.html"
-    form_class = TaskCreationForm
-    success_url = reverse_lazy("tasks:task-list")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.object
-        return context
+
+class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy("tasks:task-list")
+    template_name = "tasks/task_form.html"
+
+    def task_update(request, pk):
+        task = get_object_or_404(Task, pk=pk)
+
+        if request.method == 'POST':
+            form = TaskForm(request.POST, instance=task)
+            if form.is_valid():
+                form.save()
+                return redirect('task_detail', pk=task.pk)
+        else:
+            form = TaskForm(instance=task)
+
+        return render(request, 'tasks/task_form.html', {'form': form})
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
