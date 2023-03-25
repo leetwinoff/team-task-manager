@@ -26,7 +26,7 @@ def index(request):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "tasks/task_list.html"
-    paginate_by = 2
+    paginate_by = 5
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -115,10 +115,6 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
 
-    class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
-        model = Worker
-
-
 
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
@@ -128,7 +124,7 @@ class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
 
 class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Worker
-    fields = "__all__"
+    form_class = WorkerCreationForm
     success_url = reverse_lazy("tasks:worker-list")
 
 
@@ -169,6 +165,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
 
 class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Position
+    template_name = "tasks/position_detail.html"
 
 
 class PositionCreateView(LoginRequiredMixin, generic.CreateView):
@@ -195,10 +192,12 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     template_name = "tasks/task_type_list.html"
     paginate_by = 5
+    ordering = ["name"]
 
 
 class TaskTypeDetailView(LoginRequiredMixin, generic.DetailView):
     model = TaskType
+    template_name = "tasks/task_type_detail.html"
 
 
 class TaskTypeCreateView(LoginRequiredMixin, generic.CreateView):
