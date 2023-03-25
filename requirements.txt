@@ -1,0 +1,17 @@
+asgiref==3.6.0
+Django==4.1.7
+django-crispy-forms==2.0
+django_debug_toolbar==3.8.1
+flake8==6.0.0
+flake8-quotes==3.3.2
+flake8-variables-names==0.0.5
+generics==6.0.0
+mccabe==0.7.0
+pycodestyle==2.10.0
+pyflakes==3.0.1
+sqlparse==0.4.3
+dj_database_url==1.2.0
+psycopg2==2.9.5
+gunicorn==20.1.0
+crispy-bootstrap5==0.7
+python-dotenv~=1.0.0
