@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -44,5 +45,4 @@ class Task(models.Model):
     priority = models.CharField(choices=PRIORITY_CHOICES, max_length=10)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(Worker, related_name="tasks")
-
 
