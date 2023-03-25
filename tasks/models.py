@@ -11,7 +11,11 @@ class Position(models.Model):
 
 
 class Worker(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='workers')
+    position = models.ForeignKey(
+        Position,
+        on_delete=models.CASCADE,
+        related_name="workers"
+    )
     years_of_experience = models.IntegerField()
 
     def __str__(self):
@@ -21,7 +25,6 @@ class Worker(AbstractUser):
 
         verbose_name = "worker"
         verbose_name_plural = "workers"
-
 
 
 class TaskType(models.Model):

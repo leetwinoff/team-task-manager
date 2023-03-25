@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 
-from tasks.models import Task, Worker
+from tasks.models import Task, Worker, Position
 
 
 class TaskForm(forms.ModelForm):
@@ -16,17 +16,23 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = [
-            'name',
-            'description',
-            'deadline_date',
-            'priority',
-            'task_type',
-            'is_completed',
-            'assignees'
+            "name",
+            "description",
+            "deadline_date",
+            "priority",
+            "task_type",
+            "is_completed",
+            "assignees"
         ]
         widgets = {
-            'deadline_date': forms.TextInput(attrs={'type': 'datetime-local'})
+            "deadline_date": forms.TextInput(attrs={"type": "datetime-local"})
         }
+
+
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ["name"]
 
 
 class WorkerCreationForm(UserCreationForm):
