@@ -16,30 +16,17 @@
   {% endblock %}
 </head>
 <body>
+  {% block content %}
 
-  <div class="container">
-
-        {% block content %}
-
-        {% endblock %}
-
-        {% block pagination %}
-          {% include "includes/pagination.html" %}
-        {% endblock %}
-
-      </div>
-    </div>
-  </div>
-
-  <br>
-  <br>
-  <br>
-
-  {% block footer %}
-    <footer class="bg-light py-5">
-      <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright © 2022 - Company Name</div></div>
-    </footer>
   {% endblock %}
-
+  {% block pagination %}
+    {% include "includes/pagination.html" %}
+  {% endblock %}
 </body>
+<br>
+<br>
+<br>
+
+
+
 </html>
