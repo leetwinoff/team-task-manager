@@ -2,14 +2,6 @@
 
 {% block content %}
   <div>
-  <div class="container-dt-1">
-    <a href="{% url 'tasks:task-delete' pk=task.id %}" class="btn btn-danger link-to-page" style="float: right; margin: 10px">
-      Delete
-    </a>
-    <a href="{% url 'tasks:task-update' pk=task.id %}" class="btn btn-secondary link-to-page" style="float: right; margin: 10px">
-      Update
-    </a>
-  </div>
   <br>
   <br>
   <br>
@@ -32,23 +24,34 @@
             <td>
               <ul>
                 {% for worker in task.assignees.all %}
-                  <li>{{ worker.position }} ({{ worker.first_name }} {{ worker.last_name }})</li>
+                    <li>{{ worker.position }} ({{ worker.first_name }} {{ worker.last_name }})</li>
                 {% endfor %}
               </ul>
             </td>
         {% else %}
-          <br>
+          <td></td>
         {% endif %}
     </table>
     <br>
-    {% if task in user.tasks.all %}
-      <a href="{% url 'tasks:toggle-task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
-        Delete me from this task
-      </a>
-    {% else %}
-      <a href="{% url 'tasks:toggle-task-assign' pk=task.id %}" class="btn btn-success link-to-page">
-        Assign me for this task
-      </a>
-    {% endif %}
+    <div>
+      <div class="container-dt-1">
+        {% if task in user.tasks.all %}
+          <a href="{% url 'tasks:toggle-task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+            Delete me from this task
+          </a>
+        {% else %}
+          <a href="{% url 'tasks:toggle-task-assign' pk=task.id %}" class="btn btn-success link-to-page">
+            Assign me for this task
+          </a>
+      {% endif %}
+        <a href="{% url 'tasks:task-delete' pk=task.id %}" class="btn btn-danger link-to-page" style="float: right; margin: 10px">
+          Delete
+        </a>
+        <a href="{% url 'tasks:task-update' pk=task.id %}" class="btn btn-secondary link-to-page" style="float: right; margin: 10px">
+          Update
+        </a>
+      </div>
+    </div>
+
   </div>
 {% endblock %}
