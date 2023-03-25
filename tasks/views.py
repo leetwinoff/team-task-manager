@@ -1,12 +1,31 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin
+)
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    redirect
+)
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import WorkerCreationForm, PositionSearchForm, WorkerSearchForm, TaskSearchForm, TaskForm
-from tasks.models import Worker, Task, Position, TaskType
+from tasks.forms import (
+    WorkerCreationForm,
+    PositionSearchForm,
+    WorkerSearchForm,
+    TaskSearchForm,
+    TaskForm,
+    PositionForm
+)
+from tasks.models import (
+    Worker,
+    Task,
+    Position,
+    TaskType
+)
 
 
 def index(request):
@@ -27,7 +46,6 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "tasks/task_list.html"
     paginate_by = 5
-
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -170,14 +188,9 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
 
 class PositionCreateView(LoginRequiredMixin, generic.CreateView):
     model = Position
-    fields = "__all__"
+    form_class = PositionForm
     success_url = reverse_lazy("tasks:positions-list")
-
-
-class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Position
-    fields = "__all__"
-    success_url = reverse_lazy("tasks:positions-list")
+    template_name = "tasks/position_form.html"
 
 
 class PositionDeleteView(
