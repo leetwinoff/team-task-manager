@@ -148,7 +148,6 @@ class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class WorkerDeleteView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     generic.DeleteView
 ):
     model = Worker

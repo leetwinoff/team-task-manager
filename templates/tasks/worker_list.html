@@ -37,7 +37,7 @@
             <td style="text-align: center">{{ worker.years_of_experience }}</td>
             {% if user.is_superuser %}
               <td><a href="{% url "tasks:worker-update" pk=worker.id %}" style="color: #1b1b1b">Update</a></td>
-              <td><a href="#" style="color: #1b1b1b">Delete</a></td>
+              <td><a href="{% url "tasks:worker-delete" pk=worker.id %}" style="color: #1b1b1b">Delete</a></td>
             {% endif %}
           </tr>
         {% endfor %}

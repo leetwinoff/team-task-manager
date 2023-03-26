@@ -73,7 +73,8 @@ TEMPLATES = [
     },
 ]
 
-СRISPY_TEMPLATE_PACK = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = "team_task_manager.wsgi.application"
 
