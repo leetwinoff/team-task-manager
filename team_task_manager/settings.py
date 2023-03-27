@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "surf-task.onrender.com"]
 # Application definition
 
 INSTALLED_APPS = [
+    "tasks.apps.RenderConfig"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
