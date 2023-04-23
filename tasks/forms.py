@@ -54,6 +54,8 @@ def validate_years_of_experience(years_of_experience):
         raise ValidationError("Years of experience should be positive")
     elif years_of_experience == 0:
         raise ValidationError("Years of experience should be more than 1 Year for this position")
+    elif years_of_experience >= 50:
+        raise ValidationError("If you have worked for more than 50 years, please enter '50' as the maximum allowable value.")
     return years_of_experience
 
 
