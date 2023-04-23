@@ -4,6 +4,7 @@ Django project for management of workers with positions and tasks
 
 Check it out!
 
+[Surf Task](https://surf-task.onrender.com)
 
 
 Login Credentials:
@@ -16,6 +17,9 @@ Installation
 
 Python3 must be already installed
 
+
+## USAGE 
+```python
 git clone https://github.com/leetwinoff/team-task-manager.git
 python3 -m venv venv
 venv\Scripts\activate
@@ -23,6 +27,9 @@ pip install -r requirements.txt
 
 python manage.py migrate
 python manage.py runserver
+```
+
+
 Features
 
 Authentication functionality for Worker/User

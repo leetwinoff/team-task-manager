@@ -8,13 +8,16 @@ from tasks.models import Worker, Task, TaskType, Position
 class WorkerAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("position",)
     fieldsets = UserAdmin.fieldsets + (
-        ("Additional info", {
-            "fields": ("years_of_experience", ),
-        }),
+        (
+            "Additional info",
+            {
+                "fields": ("years_of_experience",),
+            },
+        ),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("Personal info", {"fields": ("first_name", "last_name", "email")}),
-        ("Additional info", {"fields": ("years_of_experience", )}),
+        ("Additional info", {"fields": ("years_of_experience",)}),
     )
 
 
@@ -22,7 +25,7 @@ class WorkerAdmin(UserAdmin):
 class Task(admin.ModelAdmin):
     list_display = (
         "name",
-        "description" ,
+        "description",
         "deadline_date",
         "is_completed",
         "priority",
@@ -34,5 +37,3 @@ class Task(admin.ModelAdmin):
 
 admin.site.register(TaskType)
 admin.site.register(Position)
-
-

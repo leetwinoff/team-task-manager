@@ -12,9 +12,7 @@ class Position(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
-        Position,
-        on_delete=models.CASCADE,
-        related_name="workers"
+        Position, on_delete=models.CASCADE, related_name="workers"
     )
     years_of_experience = models.IntegerField()
 
@@ -22,7 +20,6 @@ class Worker(AbstractUser):
         return self.username
 
     class Meta:
-
         verbose_name = "worker"
         verbose_name_plural = "workers"
 
@@ -43,9 +40,8 @@ class Task(models.Model):
         ("low", "Low Priority"),
         ("medium", "Medium Priority"),
         ("high", "High Priority"),
-        ("urgent", "Urgent Priority")
+        ("urgent", "Urgent Priority"),
     ]
     priority = models.CharField(choices=PRIORITY_CHOICES, max_length=10)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(Worker, related_name="tasks")
-
