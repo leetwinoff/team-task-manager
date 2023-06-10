@@ -7,19 +7,19 @@ Check it out!
 [Surf Task](https://surf-task.onrender.com)
 
 
-Login Credentials:
+## Login Credentials:
 
 User: admin1234
 
 Password: zxcv4321
 
-Installation
+# Installation
 
 Python3 must be already installed
 
 
 ## USAGE 
-```python
+```bash
 git clone https://github.com/leetwinoff/team-task-manager.git
 python3 -m venv venv
 venv\Scripts\activate
