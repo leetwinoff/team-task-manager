@@ -1,6 +1,7 @@
-Realtor agency project
+IT Team task manager 
 
-Django project for management of workers with positions and tasks
+Django project for management of workers with positions and tasks.
+Create worker. Create tasks with corresponding tasks types. Assign/unassigned worker from task. 
 
 Check it out!
 
