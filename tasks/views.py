@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -78,12 +78,11 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
             form = TaskForm(request.POST, instance=task)
             if form.is_valid():
                 form.save()
-                return redirect("task_detail", pk=task.pk)
+                return redirect("tasks:task-detail", pk=task.pk)
         else:
             form = TaskForm(instance=task)
 
         return render(request, "tasks/task_form.html", {"form": form})
-
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
@@ -205,13 +204,17 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("tasks:task-types")
 
 
-@login_required
-def toggle_assign_to_task(request, pk):
-    worker = Worker.objects.get(id=request.user.id)
-    if (
-        Task.objects.get(id=pk) in worker.tasks.all()
-    ):  # probably could check if car exists
-        worker.tasks.remove(pk)
-    else:
-        worker.tasks.add(pk)
-    return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[pk]))
+class ToggleAssignToTaskView(LoginRequiredMixin, generic.View):
+    def get(self, request, pk):
+        worker = get_object_or_404(Worker, id=request.user.id)
+        task = get_object_or_404(Task, id=pk)
+
+        if task in worker.tasks.all():
+            worker.tasks.remove(task)
+        else:
+            worker.tasks.add(task)
+
+        task_detail_url = reverse_lazy('tasks:task-detail', args=[pk])
+        return HttpResponseRedirect(task_detail_url)
+
+
